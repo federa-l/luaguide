@@ -123,18 +123,14 @@ print([[
 ]]
 ```
 
-As I mentioned earlier, `name-calling` uses `:`. This is just you calling the function and the value you called it on being passed as the first argument/parameter.
+If you want to concatenate strings (or numbers), you use the `..` operator.
 ```lua
--- This requires the manual passing of the string.
-print(string.sub('Hello, World!', 2))
+print('Hello, ' .. 'World!')
+```
 
--- While this code uses name-calling, so we call the function on the value.
-print(('Hello, World!'):sub(2))
-
--- This form of name-calling is more easily understandable (without the parentheses like before).
-local hello_world = 'Hello, World!'
-
-print(hello_world:sub(2))
+In order to concatenate booleans into strings, you have to use `tostring()`, which will be covered further on.
+```lua
+print('Hello, ' .. tostring(true))
 ```
 
 The string library and can be learned about further [here](https://www.lua.org/pil/20.html).
@@ -211,7 +207,91 @@ print(tbl.our_rvar)
 print(tbl['our_rvar'])
 ```
 
+### Operators
+Operators can range from logical operators to arithmetical operators. Here are the logical operators:
+* `and` Checks if the previous and after statements are true.
+* `or` Checks if the previous or the after statement is true.
+* `not` Checks if the after statement is false.
 
+Here are the arthmetical operators:
+* `+` Addition
+* `==` Comparison
+* `-` Subtraction (or negativity)
+* `/` Division
+* `%` Modulo
+* `*` Multiplication
 
+Logical operators are used for conditions.
+```lua
+print(1 and 0) -- Returns true because both of these numbers exist.
+print(not true) -- Prints false, which is the opposite of true.
+print(not false) -- Prints true, since 'not' represents false.
+```
 
+Arithmetic operators are used for number manipulation or conditions.
+```lua
+print(true == true) -- Returns true because true does equal true.
+print(1 == 0) -- Returns false because 1 doesn't equal 0.
+print(1 / 0.5) -- Returns 2 because 1 divided by 0.5 equals 2.
+print(500 - 100) -- Returns 400 because 500 subtracted by 100 equals 400.
+```
 
+### Math
+The math library, or the keyword `math`, is used for... well.. math.
+```lua
+print(math.round(0.5)) -- Returns 1 because 0.5 rounds to 1.
+print(math.abs(-60)) -- Returns 60 because the absolute value of -60 equals 60.
+```
+
+You can find more on the math library [here](https://www.lua.org/pil/18.html).
+
+### Statements
+Statements are created using logical operators. If statements, loops, and more are stopped/finished using the keyword `end`. Lua does not utilize braces or encasings for
+loops or statements.
+
+```lua
+-- This is a simple if statement, which checks if the existence of 'istrue' is there, or if it has a value of true.
+local istrue = true
+
+if istrue then
+  print('Istrue is a variable that exists, or is true.')
+else
+  print('Istrue doesn\'t exist, or is false.')
+end
+```
+
+Now, onto more complex if statements...
+```lua
+-- This is a more complex if statment which involves math and more logical operators.
+local intone = 1
+local inttwo = 2
+local intonecopy = intone
+
+if (intone + inttwo) == 3 and intonecopy == intone then -- You don't have to surround the addition in parentheses, by the way. Lua can handle mathematical order.
+  print('Intone and inttwo equal 3, while intonecopy is equal to intone.')
+else
+  print('That statement was excruciatingly false.')
+end
+```
+
+### Loops
+Lua features every loop you can think of, besides a `for (int)` (or more commonly known as `for (let)`) one. Loops are started by using the `do` keyword.
+```lua
+-- Here's a simple while loop.
+local whilevar = true
+
+while whilevar do -- This will continue until 'whilevar' is defined as false.
+  print('Seems we\'re stuck in a loop!')
+end
+```
+
+Now moving onto `repeat` loops.
+```lua
+local repeatvar = true
+
+repeat
+  print('We\'re repeating this over and over, sighhhhhhh...')
+until not repeatvar -- This loop will continue until 'repeatvar' is defined as false.
+```
+
+The difference between a `while` loop and a `repeat` loop is that even if the condition is false, the `repeat` loop will run at least once.
