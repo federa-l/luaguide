@@ -1,9 +1,11 @@
 ### Description
 A beginner's guide to Lua.
 
+### Official Documentation
+The official `Programming in Lua` (the most widely used Lua reference/guide) can be read [here](https://www.lua.org/pil/contents.html). It contains everything I cover in this guide and much more.
+
 ### Topics
 * Disclaimers
-* Files
 * Comments
 * Printing
 * Variables
@@ -15,21 +17,14 @@ A beginner's guide to Lua.
 * Statements
 * Loops
 * Functions
-* Conversion
-* Scope
+* Scoping
 * Globals
-* Operating System
-* Extra
 
 # Guide
 ### Disclaimers
 * `;` is not required in Lua and is practically ignored.
 * `''` is the same thing as `""` in Lua. `''` doesn't stand for a character.
 * Lua is a case sensitive language. `Lua` and `lua` are entirely different in the compiler's eyes.
-
-### Files
-File names in lua end with `.lua`. The file name doesn't commonly have an expectation like how in JavaScript they use `index.js`. If you did come across that though, they usually
-utilize the file name `main.lua` or `init.lua`.
 
 ### Comments
 Comments in lua begin with `--`.
@@ -292,4 +287,119 @@ local repeatvar = true
 repeat
   print('We\'re repeating this over and over, sighhhhhhh...')
 until not repeatvar -- This loop will continue until 'repeatvar' is defined as false.
+```
+
+Then we have `for` loops. You can use these for tables, strings, and numbers. Strings are usually looped through using Lua expressions (or more commonly associated as regex).
+```lua
+-- Our table.
+local tbl = {'welcome', 'to', 'hell'}
+
+-- Looping through said table.
+for i, v in pairs(tbl) do -- Pairs is for loops, just go with the flow.
+  print(i, v) -- Returns the current index (1, 2, 3, etc.) and the value at that index (hence 'v').
+end
+
+-- You don't have to use 'i, v'. You can name 'i' using 'Index', or whatever you like.
+```
+
+Now we are going to try a numerical loop.
+```lua
+-- Looping from one number to the other number.
+for i = 0, 5 do
+  print(i) -- Returns 1, 2, 3, etc.
+end
+
+--[[
+  Your console will look like this:
+  
+  1
+  2
+  3
+  4
+  5
+]]
+```
+
+When it comes to tables, you can also loop through them using `ipairs`. It's a faster and more efficient way compared to `pairs`. However, `ipairs` will only scan only table values that aren't indexed using names/strings, like `['my favorite color']`, and will stop the loop if it comes upon a nil value, unlike `pairs`. Always use `ipairs` if you're comfortable with it. I switch from them 24/7 in my code.
+```lua
+-- Our table
+local tbl = {
+  ['123'] = true,
+  5,
+  6,
+  false,
+  nil,
+  ['ok'] = false,
+  'hello'
+}
+
+for i, v in ipairs(tbl) do
+  print(i, v)
+end
+
+--[[
+  Your console will look like this:
+  
+  5,
+  6
+  false
+  
+  That is because it is ignoring named indexes, as well as nil properties.
+]]
+```
+
+### Functions
+Functions, or sometimes named methods, are pretty self explanatory.
+```lua
+-- Initiating a local function.
+local function hello_world(parameterone, parametertwo)
+  print('Hello, ' .. parameterone .. ' and ' .. parametertwo)
+end
+
+-- You can also use this syntax.
+local hello_world = function(parameterone, parametertwo)
+  print('Hello, ' .. parameterone .. ' and ' .. parametertwo)
+end
+```
+
+Within the global scope, which I'll explain later on, you can make functions for a table that use the `:` syntax. Normally functions from a table will be called using `.`.
+```lua
+local tbl = {}
+
+-- Our globally scoped function.
+function tbl:printrandomstuff()
+  print('blah blah blah')
+end
+
+-- Calling the function.
+tbl:printrandomstuff()
+```
+
+### Scoping
+Lua has scoping syntax that is similar to commonly known scoping syntaxes.
+```lua
+if 1 == 1 then
+  local var = 1
+end
+
+print(var) -- Returns nil, as that variable is a local that is initiated inside that if statement only. It only exists within that statement.
+```
+
+### Globals
+In Lua, you can define globals that will be accessible, without requiring or putting them in a local, throughout the entire workspace. In every Lua project, there is a keyword that has the value of a table. The keyword is `_G`.
+```lua
+-- 'hello_world' is now available globally. _G works like a standard table, just with an exponentially larger scope.
+_G.hello_world = 'Hello, World!'
+```
+
+Here's an example of scoping with `_G`.
+```lua
+if true then
+  local randvar = 10
+  
+  _G.gvar = 10
+end
+
+print(randvar) -- Returns nil, as the local we created is only available inside the if statement.
+print(gvar) -- Returns 10, as 'gvar' is now globally scoped.
 ```
