@@ -285,7 +285,7 @@ while whilevar do -- This will continue until 'whilevar' is defined as false.
 end
 ```
 
-Now moving onto `repeat` loops.
+Now moving onto `repeat` loops. The difference between a `while` and `repeat` loop is that the `repeat` loop will run the condition at least once, whether the condition is false or not.
 ```lua
 local repeatvar = true
 
@@ -293,5 +293,3 @@ repeat
   print('We\'re repeating this over and over, sighhhhhhh...')
 until not repeatvar -- This loop will continue until 'repeatvar' is defined as false.
 ```
-
-The difference between a `while` loop and a `repeat` loop is that even if the condition is false, the `repeat` loop will run at least once.
