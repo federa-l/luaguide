@@ -25,6 +25,7 @@ The official `Programming in Lua` (the most widely used Lua reference/guide) can
 * `;` is not required in Lua and is practically ignored.
 * `''` is the same thing as `""` in Lua. `''` doesn't stand for a character.
 * Lua is a case sensitive language. `Lua` and `lua` are entirely different in the compiler's eyes.
+* Lua also uses `elseif` and `else`.
 
 ### Comments
 Comments in lua begin with `--`.
@@ -83,7 +84,7 @@ local str = 'Hello, World!'
 local strtwo = "Hello, World!"
 ```
 
-Lua has a string library as well. The library can be used using `:` or `.`.
+Lua has a string library as well. The library can be used using `:` or `.`. The `:` syntax will be covered later on in this guide.
 ```lua
 -- This is subbing in Lua.
 print(string.sub('Hello, World!' , 2)) -- This will print 'ello, World!'.
@@ -98,10 +99,10 @@ Nothing much!
 Meow.
 ]]
 
---[[
+--[=[
   Multi-line strings account for ALL whitespace. This means [[ hi]] will return ' hi'.
   Here's what I mean...
-]]
+]=]
 
 print([[
 hi there
@@ -202,11 +203,33 @@ print(tbl.our_rvar)
 print(tbl['our_rvar'])
 ```
 
+There is also a table library. Table functions cannot be called using `:`, but can be directly called from the table library.
+```lua
+local tbl = {}
+
+-- Inserting new properties into our table.
+table.insert(tbl, 'hi')
+table.insert(tbl, 'hello world ok')
+
+-- Concatenating our table.
+print(table.concat(tbl, '\n'))
+
+--[[
+  Your console will look like this:
+  
+  hi
+  hello world ok
+]]
+```
+
+More details on the table library can be read [here](https://www.lua.org/pil/2.5.html).
+
 ### Operators
 Operators can range from logical operators to arithmetical operators. Here are the logical operators:
 * `and` Checks if the previous and after statements are true.
 * `or` Checks if the previous or the after statement is true.
 * `not` Checks if the after statement is false.
+* `~=` Checks if the previous and after values don't equal eachother.
 
 Here are the arthmetical operators:
 * `+` Addition
@@ -264,7 +287,7 @@ local intonecopy = intone
 
 if (intone + inttwo) == 3 and intonecopy == intone then -- You don't have to surround the addition in parentheses, by the way. Lua can handle mathematical order.
   print('Intone and inttwo equal 3, while intonecopy is equal to intone.')
-else
+elseif (intone + inttwo) ~= 3 then
   print('That statement was excruciatingly false.')
 end
 ```
