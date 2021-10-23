@@ -2,7 +2,7 @@
 A beginner's guide to Lua.
 
 ### Official Documentation
-The official `Programming in Lua` (the most widely used Lua reference/guide) can be read [here](https://www.lua.org/pil/contents.html). It contains everything I cover in this guide and much more.
+The official `Programming in Lua` (the most widely used Lua reference/guide) can be read [here](https://www.lua.org/pil/contents.html). It contains everything I cover in this guide and much more, like asynchronous Lua, their API, and tons of other useful reviews.
 
 ### Topics
 * Disclaimers
