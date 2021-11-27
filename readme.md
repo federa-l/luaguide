@@ -227,10 +227,10 @@ Operators can range from logical operators to arithmetical operators. Here are t
 * `or` Checks if the previous or the after statement is true.
 * `not` Checks if the after statement is false.
 * `~=` Checks if the previous and after values don't equal eachother.
+* `==` Checks if the previous and after values equal eachother.
 
 Here are the arthmetical operators:
 * `+` Addition
-* `==` Comparison
 * `-` Subtraction (or negativity)
 * `/` Division
 * `%` Modulo
